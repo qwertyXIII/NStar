@@ -1,0 +1,72 @@
+@import url('../vendor/normalize.css');
+
+.page {
+  min-height: 100vh;
+  font-family: 'Inter', sans-serif;
+  background-color: #222;
+}
+
+.text_transperent {
+  color: transparent;
+  filter: blur(2px);
+  scale: .95;
+}
+
+.section {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.text {
+  color: white;
+  font-size: 24px;
+}
+
+.wishes {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url('../media/black-background-with-fabric-texture_23-2149872522.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+.happybd {
+  position: relative;
+  z-index: 1000;
+}
+
+.happybd__name {
+  color: white;
+  text-align: center;
+  font-weight: 900;
+  font-size: 40px;
+  margin: 0;
+  text-shadow: black 0 0 5px;
+}
+
+.happybd__text {
+  color: white;
+  text-align: center;
+  font-size: 20px;
+  margin: 10px 0 0 0;
+  text-shadow: black 0 0 5px;
+}
+
+.career {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.messages {
+  display: flex;
+  flex-direction: column;
+}
