@@ -18,7 +18,7 @@ setInterval(() => spawnRandomWish(document.querySelector('.wishes'), wishes), 30
 gsap.from(".happybd", { y: '-100vh', scrollTrigger: { trigger: "#happybd", start: "top 100%", end: "bottom top", scrub: true } });
 
 gsap.fromTo(".career",
-  { y: "200vh", scale: 0.1, borderRadius: "100vw", transformOrigin: "center center" },
+  { y: "00vh", scale: 0.1, borderRadius: "100px", transformOrigin: "center center" },
   { y: "-20vh", scale: 1, borderRadius: "0px", scrollTrigger: { trigger: "#happybd", start: "top bottom", end: "bottom top", scrub: true } }
 );
 
