@@ -6,6 +6,23 @@
   background-color: #222;
 }
 
+.preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: black;
+  z-index: 10000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.preloader__text {
+  font-size: 30px;
+  color: white;
+}
+
 .text_transperent {
   color: transparent;
   filter: blur(2px);
@@ -35,6 +52,18 @@
   background-image: url('../media/black-background-with-fabric-texture_23-2149872522.jpg');
   background-size: cover;
   background-position: center;
+  overflow: hidden; /* чтобы псевдоэлемент не вылезал наружу */
+}
+.wishes::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -50px; /* расширяем по бокам, чтобы тень не обрезалась */
+  width: calc(100% + 100px);
+  height: 100%;
+  pointer-events: none;
+    box-shadow: inset 0 30px 30px 10px #222, inset 0 -30px 30px 10px #222;
+  border-radius: inherit; /* повторяем форму родителя, если надо */
 }
 
 .happybd {
@@ -63,10 +92,279 @@
   background-color: white;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  justify-content: start;
 }
 
-.messages {
+.chat {
+  width: 90vw;
+  max-width: 800px;
+  font-family: sans-serif;
+}
+
+/* Общий стиль пузырька */
+.message {
+  display: flex;
+  margin: 10px;
+}
+
+.message .bubble {
+  position: relative;
+  padding: 10px 14px;
+  border-radius: 16px;
+  max-width: 75%;
+  word-wrap: break-word;
+}
+
+/* Время метка */
+.message .time {
+  display: block;
+  font-size: 0.75rem;
+  color: #666;
+  margin-top: 4px;
+  text-align: right;
+}
+
+/* --- Telegram стиль --- */
+.message.telegram {
+  justify-content: flex-start;
+}
+.message.telegram .bubble {
+  background: #9248ff; /* светлый фон */
+  color: #ffffff;
+  border: 1px solid #e0e0e0;
+}
+/* --- WhatsApp стиль --- */
+.message.whatsapp {
+  justify-content: flex-end;
+}
+.message.whatsapp .bubble {
+  background: #dcf8c6; /* светло-зелёный фон */
+  color: #000;
+}
+/* --- iMessage стиль --- */
+.message.imessage {
+  justify-content: flex-end;
+}
+.message.imessage .bubble {
+  background: #0b93f6; /* синий-голубой */
+  color: #fff;
+}
+/* --- Instagram стиль --- */
+.message.instagram {
+  justify-content: flex-start;
+}
+.message.instagram .bubble {
+  background: #25292e; /* светло-серый фон */
+  color: #ffffff;
+  border: 1px solid #dbdbdb;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+.section.social {
+  position: relative;
+  height: auto; /* теперь высота будет расти по количеству точек */
+  background: #222;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-start;
+  margin: -15vh 0 0 0;
+  box-shadow: #020213 0px -20px 20px 5px;
+}
+
+
+#spline-container {
+  position: absolute;
+  height: 100%; /* или другая нужная высота */
+  width: 100vw;
+}
+
+#spline-container canvas {
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+  object-fit: cover;
+}
+.social__message {
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  top: 0px;
+  left: 10vh;
+  width: max-content;
+  text-align: center;
+  font-size: 40px;
+  font-weight: 700;
+  color: white;
+  box-sizing: border-box;
+  text-shadow: black 0 0 5px;
+}
+.lines-container {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 10vh 10vw;
+  box-sizing: border-box;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+/* Линии */
+.line {
+  position: relative;
+  width: 2px;
+  background: linear-gradient(to bottom, rgba(34,34,34,0) 0%, currentColor 10%, currentColor 90%, rgba(34,34,34,0) 100%);
+  box-shadow: 0 0 15px currentColor, 0 0 30px currentColor, 0 0 45px currentColor;
+}
+
+.line.likes { color: red; border-radius: 100% ;}
+.line.followers { color: white; border-radius: 100%; }
+
+/* Точки */
+.dot {
+  position: absolute;
   display: flex;
   flex-direction: column;
+  opacity: 0;
+}
+
+.dot.likes { 
+  left: 20px;  /* справа от линии */
+  align-items: flex-start;
+}
+.dot.likes::after { 
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: -24px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: red;
+  box-shadow:
+    0 0 4px red,
+    0 0 8px red,
+    0 0 12px red,
+    0 0 20px rgba(255,0,0,0.4);
+}
+
+.dot.followers { 
+  right: 20px; /* слева от линии */
+  align-items: flex-end;
+}
+
+.dot.followers::after { 
+  content: "";
+  position: absolute;
+  top: 3px;
+  right: -24.5px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: white;
+
+  /* glow */
+  box-shadow:
+    0 0 4px white,
+    0 0 8px white,
+    0 0 12px white,
+    0 0 20px rgba(255,255,255,0.4);
+}
+
+/* Содержимое точки */
+.dot .year {
+  font-weight: bold;
+  color: white;
+  font-size: 30px;
+}
+
+.dot .count {
+  display: flex;
+  align-items: center;
+  margin-top: 4px;
+  font-size: 25px;
+  color: white;
+}
+
+.dot .count svg {
+  width: 16px;
+  height: 16px;
+  margin-right: 4px;
+  fill: currentColor;
+}
+
+.dot .message {
+  margin-top: 4px;
+  color: #ccc;
+  font-size: 20px;
+  width: max-content;
+  max-width: 70vw;
+}
+
+.dot.followers .message {
+  text-align: end;
+}
+
+.gift__title {
+  color: #fff;
+}
+
+.cards {
+  display: flex;
+  position: relative;
+  justify-content: space-evenly;
+  box-sizing: border-box;
+}
+
+/* Для экранов меньше 900px */
+@media (max-width: 900px) {
+  .cards {
+    flex-direction: column;
+    gap: 20px;
+    padding:  0 0 100px 0;
+  }
+}
+
+.card {
+  position: relative;
+  width: 270px;
+  height: 400px;
+  color: #fff;
+  background-color: #2b2b2b60;
+  border-radius: 30px;
+  padding: 20px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+.card::after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  content: '';
+  width: 50%;
+  height: 100%;
+  background-color: #2b2b2b17;
+}
+
+.card__title {
+  font-size: 30px;
+  font-weight: 900;
+  margin: 0;
+}
+
+.author {
+  position: absolute;
+  bottom: 5px;
+  right: 15px;
+  color: rgba(128, 128, 128, 0.288);
 }
