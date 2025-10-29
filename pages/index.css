@@ -366,5 +366,12 @@
   position: absolute;
   bottom: 5px;
   right: 15px;
-  color: rgba(128, 128, 128, 0.288);
+  color: rgba(68, 68, 68, 0.692);
+}
+.wave {
+  position: absolute;
+  width: 100vw;
+  bottom: 0;
+  left: 0;
+  height: 300px;
 }

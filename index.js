@@ -101,7 +101,7 @@ Promise.all([new Promise(res => window.onload = res), document.fonts.ready])
     const happyText = document.querySelector('.happybd__text');
     setTimeout(() => {
       changeText(happyText, 'Ой, бл...');
-      setTimeout(() => changeText(happyText, 'С днем рождения! �'), 1000);
+      setTimeout(() => changeText(happyText, 'С днем рождения!'), 1000);
     }, 2000);
 
     gsap.fromTo(".gift__title", { y: "-50vh", scale: 0.1, transformOrigin: "center center" }, { y: "40vh", scale: 1, scrollTrigger: { trigger: "#gift", start: "top bottom", end: "bottom top", scrub: true } });
