@@ -70,10 +70,10 @@ allData.forEach(item => {
   gsap.fromTo(dot, { opacity: 0, y: 20 }, { opacity: 1, y: 0, scrollTrigger: { trigger: dot, start: 'top 90%', end: 'top 80%', toggleActions: 'play none none none' } });
 
   gsap.to({ value: 0 }, {
-    value: parseInt(item.data.num.replace(/\s/g,''), 10),
+    value: parseInt(item.data.num.replace(/\s/g, ''), 10),
     duration: 2,
     scrollTrigger: { trigger: dot, start: 'top 90%', toggleActions: 'play none none none' },
-    onUpdate: function() { number.textContent = Math.floor(this.targets()[0].value).toLocaleString('ru-RU'); }
+    onUpdate: function () { number.textContent = Math.floor(this.targets()[0].value).toLocaleString('ru-RU'); }
   });
 });
 
@@ -82,7 +82,7 @@ document.querySelectorAll('.line').forEach(line => line.style.height = `${curren
 // === Соц. надпись ===
 const msg = document.querySelector(".social__message");
 const textWidth = msg.offsetWidth, viewportWidth = window.innerWidth;
-gsap.fromTo(msg, { x: viewportWidth }, { x: -textWidth - 150, ease: "none", scrollTrigger: { trigger: "#social", start: "top bottom", end: `+=${(textWidth + viewportWidth)*(viewportWidth<768?0.4:0.45)}`, scrub: 0.3, invalidateOnRefresh: true } });
+gsap.fromTo(msg, { x: viewportWidth }, { x: -textWidth - 150, ease: "none", scrollTrigger: { trigger: "#social", start: "top bottom", end: `+=${(textWidth + viewportWidth) * (viewportWidth < 768 ? 0.4 : 0.45)}`, scrub: 0.3, invalidateOnRefresh: true } });
 
 // === 3D сцена Spline ===
 const canvas = document.createElement("canvas");
@@ -99,21 +99,23 @@ Promise.all([new Promise(res => window.onload = res), document.fonts.ready])
     document.body.style.overflow = '';
 
     const happyText = document.querySelector('.happybd__text');
-    changeText(happyText, 'Ой, бл...');
-    setTimeout(() => changeText(happyText, 'С днем рождения! �'), 1000);
+    setTimeout(() => {
+      changeText(happyText, 'Ой, бл...');
+      setTimeout(() => changeText(happyText, 'С днем рождения! �'), 1000);
+    }, 2000);
 
     gsap.fromTo(".gift__title", { y: "-50vh", scale: 0.1, transformOrigin: "center center" }, { y: "40vh", scale: 1, scrollTrigger: { trigger: "#gift", start: "top bottom", end: "bottom top", scrub: true } });
     gsap.fromTo(".social", { scale: 1, transformOrigin: "center center" }, { scale: 0.9, borderRadius: 50, opacity: 0, scrollTrigger: { trigger: "#gift", start: "top bottom", end: "bottom top", scrub: true } });
 
     function updateScale() {
       const w = window.innerWidth;
-      phone.scale.set(w<768?0.6:w<1440?0.8:1, w<768?0.6:w<1440?0.8:1, w<768?0.6:w<1440?0.8:1);
+      phone.scale.set(w < 768 ? 0.6 : w < 1440 ? 0.8 : 1, w < 768 ? 0.6 : w < 1440 ? 0.8 : 1, w < 768 ? 0.6 : w < 1440 ? 0.8 : 1);
     }
     updateScale();
     window.addEventListener("resize", updateScale);
 
     gsap.fromTo(phone.position, { y: -300 }, { y: 300, scrollTrigger: { trigger: "#social", start: "top bottom", end: "bottom top", scrub: true } });
-    gsap.fromTo(phone.rotation, { y: 0, x: 0 }, { y: Math.PI/4, x: Math.PI/8, scrollTrigger: { trigger: "#social", start: "top bottom", end: "bottom top", scrub: true } });
+    gsap.fromTo(phone.rotation, { y: 0, x: 0 }, { y: Math.PI / 4, x: Math.PI / 8, scrollTrigger: { trigger: "#social", start: "top bottom", end: "bottom top", scrub: true } });
 
     animateCards();
   });
@@ -128,7 +130,7 @@ function animateCards() {
   if (width >= 900) {
     gsap.to(cards, { opacity: 1, y: 0, stagger: 0.2, duration: 0.8, ease: "back.out(1.7)", scrollTrigger: { trigger: ".cards", start: "top 80%", end: "bottom top", toggleActions: "play none none none" }, onStart: () => cards.forEach(c => gsap.set(c, { y: 100 })) });
   } else {
-    cards.forEach((c, i) => gsap.fromTo(c, { opacity: 0, x: i%2===0?-200:200 }, { opacity: 1, x: 0, duration: 0.8, ease: "power3.out", scrollTrigger: { trigger: c, start: "top 90%", toggleActions: "play none none none" } }));
+    cards.forEach((c, i) => gsap.fromTo(c, { opacity: 0, x: i % 2 === 0 ? -200 : 200 }, { opacity: 1, x: 0, duration: 0.8, ease: "power3.out", scrollTrigger: { trigger: c, start: "top 90%", toggleActions: "play none none none" } }));
   }
 }
 
