@@ -345,6 +345,7 @@
   padding: 20px;
   box-sizing: border-box;
   overflow: hidden;
+  backdrop-filter: blur(10px);
 }
 .card::after {
   position: absolute;
@@ -367,11 +368,4 @@
   bottom: 5px;
   right: 15px;
   color: rgba(68, 68, 68, 0.692);
-}
-.wave {
-  position: absolute;
-  width: 100vw;
-  bottom: 0;
-  left: 0;
-  height: 300px;
 }
